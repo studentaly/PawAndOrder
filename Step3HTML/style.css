@@ -1,0 +1,37 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background-color: rgb(203, 212, 203);
+
+
+}
+
+.title{
+    color:rgb(43, 45, 51)
+}
+
+.links{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width:40%;
+}
+
+table, th, td {
+    border: 1px solid;
+    margin: 30px;
+    align-items: center;
+  }
+
+.form{
+    margin: 30px;
+    align-items: center;
+  }

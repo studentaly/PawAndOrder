@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Paw and Order</title>
+</head>
+<body>
+
+    <nav>    <div class="title">
+        <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
+    </div>
+    <ul class="links">
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <a href="customers.html">Customers</a>
+        </li>
+        <li>
+            <a href="dogs.html">Dogs</a>
+        </li>
+        <li>
+            <a href="employees.html">Employees</a>
+        </li>
+        <li>
+            <a href="commandsLearned.html">Commands Learned by Dog</a>
+        </li>
+        <li>
+            <a href="commands.html">Commands</a>
+        </li>
+        <li>
+            <a href="trainingSessions.html">TrainingSessions</a>
+        </li>
+    </ul>
+    </nav>
+    <h1>Paw and Order - Dogs</h1>
+    <table>
+        <tr>
+          <th>Dog ID</th>
+          <th>Customer's Name</th>
+          <th>Dog's Name</th>
+          <th>Dog's Birthday </th>
+          <th>Active</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr>
+          <td>Sample Dog ID</td>
+          <td>Sample Customer Name</td>
+          <td>Sample Dog Name</td>
+          <td>Sample Dog Birthday</td>
+          <td>Sample Active</td>
+          <td><a href="editDogs.html"><i class="fa fa-paw"></i></a></td>
+          <td><a href="deleteDogs.html"><i class="fa fa-trash"></i></a></td>
+        </tr>
+      </table>
+      <div class="form">
+        <h2>Input New Dog:</h2>
+        <input type="text" id="dogsCustomerName" placeholder="Dog's Owner">
+        <input type="text" id="dogsDogName" placeholder="Dog's Name">
+        <input type="date" id="dogsDogBirthday" placeholder="Dog's Birthday">
+        <input type="text" id="dogsActive" placeholder="Active">
+        <button class="button" id=textButton>Submit</button>
+        </div>
+        
+</body>
+</html>

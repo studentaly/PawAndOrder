@@ -13,45 +13,46 @@
     <nav>    <div class="title">
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
     </div>
-    <ul class="links">
-        <li>
-            <a href="index.html">Home</a>
-        </li>
-        <li>
-            <a href="customers.html">Customers</a>
-        </li>
-        <li>
-            <a href="dogs.html">Dogs</a>
-        </li>
-        <li>
-            <a href="employees.html">Employees</a>
-        </li>
-        <li>
-            <a href="commandsLearned.html">Commands Learned by Dog</a>
-        </li>
-        <li>
-            <a href="commands.html">Commands</a>
-        </li>
-        <li>
-            <a href="trainingSessions.html">TrainingSessions</a>
-        </li>
-    </ul>
+    <div class="links">
+        <a href="index.html">Home</a>
+        ~
+        <a href="customers.html">Customers</a>
+        ~
+        <a href="dogs.html">Dogs</a>
+        ~
+        <a href="employees.html">Employees</a>
+        ~
+        <a href="commandsLearned.html">Commands Learned By Dog</a>
+        ~
+        <a href="commands.html">Commands</a>
+        ~
+        <a href="trainingSessions.html">TrainingSessions</a>
+</div>
     </nav>
-    <h1>Paw and Order Commands</h1>
+    <h1>Paw and Order Customers</h1>
+
     <table>
         <tr>
-          <th>Command ID</th>
-          <th>Command Name</th>
+          <th>Customer ID</th>
+          <th>Customer Name</th>
+          <th>Joint Customer Name</th>
+          <th>Phone Number</th>
+          <th>Email Address</th>
         </tr>
         <tr>
-          <td>Sample Command ID</td>
-          <td>Sample Command Name</td>
+          <td>Sample ID</td>
+          <td>Sample Name</td>
+          <td>Sample Joint Name</td>
+          <td>Sample Phone Number</td>
+          <td>Sample Email Address</td>
         </tr>
       </table>
-
       <div class="form">
-        <h2>Input New Commands:</h2>
-        <input type="text" id="commandsCommandName" placeholder="Command Name">
+        <h2>Input New Customer:</h2>
+        <input type="text" id="customersCustomerName" placeholder="Customer Name">
+        <input type="text" id="customersCustomerAlt" placeholder="Joint Customer Name">
+        <input type= "tel" id="customerPhone" placeholder="Phone Number">
+        <input type="email" id="customerEmail" placeholder="Email">
         <button class="button" id=textButton>Submit</button>
         </div>
 </body>

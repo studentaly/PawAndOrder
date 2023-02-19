@@ -19,10 +19,9 @@ nav{
 }
 
 .links{
-    display: flex;
     justify-content: space-around;
-    align-items: center;
-    width:40%;
+    align-items: right;
+    width: 60%;
 }
 
 table, th, td {

@@ -1,36 +1,49 @@
--- (C)RUD
+-- -----------------------------------------------------
+-- Group 150 ~ Alyssa Feutz & Taylor Reed
+-- Data Manipulation Queries
+-- NOTE: Colon character being used to denote the variables that will have data from the backend programming language
+-- -----------------------------------------------------
+
+
+-- -----------------------------------------------------
+-- (C)RUD 
+-- -----------------------------------------------------
+
 -- Create Customer
 INSERT INTO Customers (customerName, altName, phone, email)
-VALUES (customerNameInput, altNameInput, phoneInput, emailInput);
+VALUES (:customerNameInput, :altNameInput, :phoneInput, :emailInput);
 -- Create Dog
 -- Part I: Pre-populate dropdown box with customerName
 SELECT customerID, customerName FROM Customers
 -- Part II: Insert
 INSERT INTO Dogs (customerID, dogName, dogBirthday, active)
-VALUES (customerIDInputFromDropdown, dogNameInput, dogBirthdayInput, activeInput);
+VALUES (:customerIDInputFromDropdown, :dogNameInput, :dogBirthdayInput, :activeInput);
 -- Create Employee
 INSERT INTO Employees (employeeName, employeeType)
-VALUES (employeeNameInput, employeeTypeInput);
+VALUES (:employeeNameInput, :employeeTypeInput);
 -- Create Command
 INSERT INTO Commands (commandName)
-VALUES (commandNameInput);
+VALUES (:commandNameInput);
 -- Create Training Session
 -- Part I: Pre-populate dropdown box with customerName, dogName, employeeName
 SELECT customerID, customerName FROM Customers;
 SELECT dogID, dogName FROM Dogs;
-SElect employeeID, employeeName FROM Employees;
+SElECT employeeID, employeeName FROM Employees;
 -- Part II: Insert
 INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes)
-VALUES (customerIDInputFromDropdown, dogIDInputFromDropdown, employeeIDInputFromDropdown, sessionDateInput, notesInput);
+VALUES (:customerIDInputFromDropdown, :dogIDInputFromDropdown, :employeeIDInputFromDropdown, :sessionDateInput, :notesInput);
 -- Create CommandsLearned
 -- Part I: Pre-populate dropdown box with commandName and DogName
 SELECT commandID, commandName FROM Commands;
 SELECT dogID, dogName FROM Dogs;
 -- Part II: Insert
 INSERT INTO CommandsLearned (commandID, dogID)
-VALUES (commandIDinputFromDropdown, dogIDInputFromDropdown);
+VALUES (:commandIDinputFromDropdown, :dogIDInputFromDropdown);
 
+-- -----------------------------------------------------
 -- C(R)UD
+-- -----------------------------------------------------
+
 -- Display all customer information
 SELECT * FROM Customers;
 -- Display all dog information; inner join to get customer name instead of ID
@@ -57,18 +70,24 @@ ON CommandsLearned.commandID = Commands.commandID
 INNER JOIN Dogs
 ON CommandsLearned.dogID = Dogs.DogID;
 
+-- -----------------------------------------------------
 --CR(U)D
+-- -----------------------------------------------------
+
 -- Part I: Pre-populate drop-down box with customer names
 SELECT customerID, customerName FROM Customers
 -- Part II: Update
 UPDATE Dogs
-   SET customerID = customerIDInputFromDropdown, dogName = dogNameInput, dogBirtday= dogBirthdayInput,
-       active = activeInpput
-   WHERE dogID= dogIDInput
+   SET customerID = :customerIDInputFromDropdown, dogName = :dogNameInput, dogBirtday = :dogBirthdayInput,
+       active = :activeInpput
+   WHERE dogID = :dogIDInput
 
+-- -----------------------------------------------------
 --CRU(D)
+-- -----------------------------------------------------
+
 -- Delete Dog
-DELETE FROM Dogs WHERE dogID= dogIDInput
+DELETE FROM Dogs WHERE dogID = :dogIDInput
 -- M:M relationship deletion
-DELETE FROM CommandsLearned WHERE commandID = commandIDFromInput
-AND dogID = dogIDFromInput
+DELETE FROM CommandsLearned WHERE commandID = :commandIDFromInput
+AND dogID = :dogIDFromInput

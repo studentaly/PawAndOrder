@@ -32,21 +32,27 @@
     <h1>Paw and Order Commands Learned by Dog</h1>
     <table>
         <tr>
-          <th>Command Learned by Dog ID</th>
+          <th>Dog's Name</th>
           <th>Command</th>
-          <th>Dog</th>
         </tr>
         <tr>
-          <td>Sample Command Learned by Dog ID</td>
-          <td>Sample Command Name</td>
-          <td>Sample Dog Name</td>
+          <td>Spot</td>
+          <td>Sit</td>
         </tr>
       </table>
 
       <div class="form">
         <h2>Input New Command Learned:</h2>
-        <input type="text" id="commandsLearnedCommandName" placeholder="Command Name">
-        <input type="text" id="commandsLearnedDogName" placeholder="Dog Name">
+        <select name="commandsLearnedDogName">
+          <option selected disabled>Dog Name</option>
+          <option value="1">Spot</option>
+          <option value="2">Josh</option>
+        </select>
+        <select name="commandsLearnedCommandName">
+          <option selected disabled>Command</option>
+          <option value="1">Sit</option>
+          <option value="2">Down</option>
+        </select>
         <button class="button" id=textButton>Submit</button>
         </div>
 </body>

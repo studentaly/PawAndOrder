@@ -41,21 +41,39 @@
           <th>Delete</th>
         </tr>
         <tr>
-          <td>Sample Dog ID</td>
-          <td>Sample Customer Name</td>
-          <td>Sample Dog Name</td>
-          <td>Sample Dog Birthday</td>
-          <td>Sample Active</td>
+          <td>1</td>
+          <td>Martina Hansen</td>
+          <td>Spot</td>
+          <td>10/20/2022</td>
+          <td>yes</td>
+          <td><a href="editDogs.html"><i class="fa fa-paw"></i></a></td>
+          <td><a href="deleteDogs.html"><i class="fa fa-trash"></i></a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Gail Smith</td>
+          <td>Josh</td>
+          <td>02/01/2016</td>
+          <td>yes</td>
           <td><a href="editDogs.html"><i class="fa fa-paw"></i></a></td>
           <td><a href="deleteDogs.html"><i class="fa fa-trash"></i></a></td>
         </tr>
       </table>
       <div class="form">
         <h2>Input New Dog:</h2>
-        <input type="text" id="dogsCustomerName" placeholder="Dog's Owner">
+        <select name="dogsCustomerName">
+          <option selected disabled>Owner's Name</option>
+          <option value="1">Martina Hansen</option>
+          <option value="2">Gail Smith</option>
+          <option value="3">Alex Baker</option> 
+        </select>
         <input type="text" id="dogsDogName" placeholder="Dog's Name">
         <input type="date" id="dogsDogBirthday" placeholder="Dog's Birthday">
-        <input type="text" id="dogsActive" placeholder="Active">
+        <select name="dogsActive">
+          <option selected disabled>Active</option>
+          <option value="yes">yes</option>
+          <option value="no">no</option>
+        </select>
         <button class="button" id=textButton>Submit</button>
         </div>
         

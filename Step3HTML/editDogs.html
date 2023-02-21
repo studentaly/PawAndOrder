@@ -33,10 +33,19 @@
 
 <div class="form">
     <h2>Edit Dog Information:</h2>
-    <input type="text" id="dogsCustomerName" placeholder="Dog's Owner">
+    <select name="dogsCustomerName">
+        <option selected disabled>Owner's Name</option>
+        <option value="1">Martina Hansen</option>
+        <option value="2">Gail Smith</option>
+        <option value="3">Alex Baker</option> 
+      </select>
     <input type="text" id="dogsDogName" placeholder="Dog's Name">
     <input type="date" id="dogsDogBirthday" placeholder="Dog's Birthday">
-    <input type="text" id="dogsActive" placeholder="Active">
+    <select name="dogsActive">
+        <option selected disabled>Active</option>
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+    </select>    
     <button class="button" id=textButton>Submit</button>
       </div>
 

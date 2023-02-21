@@ -37,15 +37,24 @@
           <th>Employee's Title</th>
         </tr>
         <tr>
-          <td>Sample Employee ID</td>
-          <td>Sample Employee Name</td>
-          <td>Sample Employee Title</td>
+          <td>1</td>
+          <td>Jamie Gomez</td>
+          <td>Trainer</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Rachel Li</td>
+          <td>Office Manager</td>
         </tr>
       </table>
       <div class="form">
         <h2>Input New Employees:</h2>
         <input type="text" id="employeesEmployeeName" placeholder="Employee Name">
-        <input type="text" id="employeesEmployeeTitle" placeholder="Employee Title">
+        <select name="employeesEmployeeTitle">
+          <option selected disabled>Title</option>
+          <option value="trainer">Trainer</option>
+          <option value="manager">Office Manager</option>
+        </select>
         <button class="button" id=textButton>Submit</button>
         </div>
 </body>

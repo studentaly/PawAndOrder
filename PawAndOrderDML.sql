@@ -79,7 +79,7 @@ SELECT customerID, customerName FROM Customers
 -- Part II: Update
 UPDATE Dogs
    SET customerID = :customerIDInputFromDropdown, dogName = :dogNameInput, dogBirtday = :dogBirthdayInput,
-       active = :activeInpput
+       active = :activeInput
    WHERE dogID = :dogIDInput
 
 -- -----------------------------------------------------

@@ -6,7 +6,7 @@
 
 
 -- -----------------------------------------------------
--- (C)RUD 
+-- (C)RUD
 -- -----------------------------------------------------
 
 -- Create Customer
@@ -73,7 +73,12 @@ ON CommandsLearned.dogID = Dogs.DogID;
 -- -----------------------------------------------------
 --CR(U)D
 -- -----------------------------------------------------
+-- Update entry in Customers
+UPDATE Customers
+   SET customerName = :customerNameInput, altName = :altNameInput,
+       phone = :phoneInput, email = :emailInput
 
+-- Update entry in Dogs
 -- Part I: Pre-populate drop-down box with customer names
 SELECT customerID, customerName FROM Customers
 -- Part II: Update
@@ -85,7 +90,8 @@ UPDATE Dogs
 -- -----------------------------------------------------
 --CRU(D)
 -- -----------------------------------------------------
-
+-- Delete entry in Customers
+DELETE FROM Customers WHERE customerID = :customerIDInput;
 -- M:M relationship deletion by dogID
 DELETE FROM CommandsLearned WHERE dogID = :dogIDFromInput;
 DELETE FROM TrainingSessions WHERE dogID = :dogIDInput;

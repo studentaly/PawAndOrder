@@ -19,8 +19,8 @@ SELECT customerID, customerName FROM Customers
 INSERT INTO Dogs (customerID, dogName, dogBirthday, active)
 VALUES (:customerIDInputFromDropdown, :dogNameInput, :dogBirthdayInput, :activeInput);
 -- Create Employee
-INSERT INTO Employees (employeeName, employeeType)
-VALUES (:employeeNameInput, :employeeTypeInput);
+INSERT INTO Employees (employeeName, employeeTitle)
+VALUES (:employeeNameInput, :employeeTitleInput);
 -- Create Command
 INSERT INTO Commands (commandName)
 VALUES (:commandNameInput);
@@ -28,7 +28,7 @@ VALUES (:commandNameInput);
 -- Part I: Pre-populate dropdown box with customerName, dogName, employeeName
 SELECT customerID, customerName FROM Customers;
 SELECT dogID, dogName FROM Dogs;
-SElECT employeeID, employeeName FROM Employees;
+SElECT employeeID, employeeName FROM Employees WHERE employeeTitle = "Trainer";
 -- Part II: Insert
 INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes)
 VALUES (:customerIDInputFromDropdown, :dogIDInputFromDropdown, :employeeIDInputFromDropdown, :sessionDateInput, :notesInput);
@@ -86,8 +86,8 @@ UPDATE Dogs
 --CRU(D)
 -- -----------------------------------------------------
 
+-- M:M relationship deletion by dogID
+DELETE FROM CommandsLearned WHERE dogID = :dogIDFromInput;
+DELETE FROM TrainingSessions WHERE dogID = :dogIDInput;
 -- Delete Dog
-DELETE FROM Dogs WHERE dogID = :dogIDInput
--- M:M relationship deletion
-DELETE FROM CommandsLearned WHERE commandID = :commandIDFromInput
-AND dogID = :dogIDFromInput
+DELETE FROM Dogs WHERE dogID = :dogIDInput;

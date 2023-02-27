@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, redirect
+from flask import Flask, render_template, url_for, json, redirect
 from flask_mysqldb import MySQL
 from flask import request
 import os
@@ -19,8 +19,8 @@ mysql = MySQL(app)
 # Routes
 
 @app.route('/')
-def root():
-    return redirect("/customers")
+def index():
+    return render_template("index.html")
 
 @app.route('/customers', methods=["POST", "GET"])
 def customers():
@@ -137,4 +137,4 @@ def editCustomer(customerID):
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 9114))
-    app.run(port=port, debug=True)
+    app.run(host="flip1.engr.oregonstate.edu", port=port, debug=False)

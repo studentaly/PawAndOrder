@@ -35,9 +35,9 @@
         <h2>Edit Customer Information:</h2>
         <input type="hidden" value="{{data[0].customerID}}" class="form-control" id="customerID" name="customerID" required>
         <input type="text" id="customerName" name="customerName" required value="{{data[0].customerName}}">
-        <input type="text" id="altName" name = "altName" value="{{data[0].altName}}">
+        <input type="text" id="altName" name = "altName" value="{{data2.altName}}">
         <input type= "tel" id="phone" name = "phone" value="{{data[0].phone}}" required>
-        <input type="email" id="email" name = "email" value="{{data[0].email}}">
+        <input type="email" id="email" name = "email" value="{{data3.email}}">
         <button class="button" id=textButton id="Edit Customer" value="editCustomer" name="editCustomer">Submit</button>
       </form>
       </div>

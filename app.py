@@ -86,12 +86,22 @@ def deleteCustomer(customerID):
 @app.route("/editCustomer/<int:customerID>", methods=["POST", "GET"])
 def editCustomer(customerID):
     if request.method == "GET":
-        query = "SELECT * FROM Customers WHERE customerID = '%s';" % (customerID)
+        query = "SELECT customerID, customerName, phone FROM Customers WHERE customerID = '%s';" % (customerID)
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-
-        return render_template("editCustomer.j2", data=data)
+        
+        query2 = "SELECT altName FROM Customers WHERE customerID = '%s' AND altName IS NOT NULL;" % (customerID)
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        data2 = cur.fetchone()
+    
+        query3 = "SELECT email FROM Customers WHERE customerID = '%s' AND email IS NOT NULL;" % (customerID)
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        data3 = cur.fetchone()
+        
+        return render_template("editCustomer.j2", data=data, data2=data2, data3=data3)
 
     if request.method == "POST":
         # When user clicks "Edit customer"
@@ -118,7 +128,7 @@ def editCustomer(customerID):
                 mysql.connection.commit()
 
             # account for null email
-            elif altName == "":
+            elif email == "":
                 query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = %s, Customers.email = NULL WHERE Customers.customerID = %s"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone, altName, customerID))

@@ -1,4 +1,3 @@
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,19 +27,16 @@
         <a href="trainingSessions">TrainingSessions</a>
     </div>
     </nav>
-    <h1>Paw and Order Customers</h1>
+    <h1>Paw and Order Employees</h1>
 
     <table>
       {% if data %}
         <tr>
-          <th>Customer ID</th>
-          <th>Customer Name</th>
-          <th>Alternate Name</th>
-          <th>Phone Number</th>
-          <th>Email Address</th>
-          <th>Edit</th>
-           <th>Delete</th>
-
+          <th>Employee ID</th>
+          <th>Employee's Name</th>
+          <th>Employee's Title</th>
+                    <th>Edit</th>
+          <th>Delete</th>
         </tr>
         <tr>
           {% for item in data %}
@@ -53,20 +49,18 @@
                         {% endfor %}
 
                         <!-- Edit/delete buttons -->
-            <td><a href="editCustomer/{{item.customerID}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>
-            <td><a href="deleteCustomer/{{item.customerID}}" class="btn btn-default"><i class="fa fa-trash"></i></a></td>
+            <td><a href="editEmployee/{{item.employeeID}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>
+            <td><a href="deleteEmployee/{{item.employeeID}}" class="btn btn-default"><i class="fa fa-trash"></i></a></td>
 
           </tr>
                     {% endfor %}
             {% endif %}
         </tr>
       </table>
-      <form class="form" id="insertCustomer" action="/customers" method="post">
-        <h2>Input New Customer:</h2>
-        <input type="text" id="customerName" name="customerName" required placeholder="Customer Name">
-        <input type="text" id="altName" name = "altName" placeholder="Alternate Name">
-        <input type= "tel" id="phone" name = "phone" placeholder="Phone Number" required>
-        <input type="email" id="email" name = "email" placeholder="Email">
-        <button class="button" id=textButton id="Add Customer" value="Add Customer" name="Add Customer">Submit</button>
+      <form class="form" id="insertEmployee" action="/employees" method="post">
+        <h2>Input New Employee:</h2>
+        <input type="text" id="employeeName" name="employeeName" required placeholder="Employee Name">
+        <input type="text" id="employeeType" name="employeeType" required placeholder="Employee Title">
+        <button class="button" id=textButton id="Add Employee" value="Add Employee" name="Add Employee">Submit</button>
       </form>
 </body>

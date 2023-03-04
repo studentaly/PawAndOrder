@@ -90,17 +90,17 @@ def editCustomer(customerID):
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        
+
         query2 = "SELECT altName FROM Customers WHERE customerID = '%s' AND altName IS NOT NULL;" % (customerID)
         cur = mysql.connection.cursor()
         cur.execute(query2)
         data2 = cur.fetchone()
-    
+
         query3 = "SELECT email FROM Customers WHERE customerID = '%s' AND email IS NOT NULL;" % (customerID)
         cur = mysql.connection.cursor()
         cur.execute(query3)
         data3 = cur.fetchone()
-        
+
         return render_template("editCustomer.j2", data=data, data2=data2, data3=data3)
 
     if request.method == "POST":

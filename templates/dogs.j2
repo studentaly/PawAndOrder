@@ -1,3 +1,4 @@
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +11,9 @@
 
     <nav>    <div class="title">
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
-    </div>
+    </div
     <div class="links">
-        <a href="index">Home</a>
+        <a href="index.html">Home</a>
         ~
         <a href="customers">Customers</a>
         ~
@@ -41,22 +42,28 @@
           <th>Delete</th>
         </tr>
         <tr>
+
           {% for item in data %}
 
 
           <tr>
             <!-- Then iterate through every key in the current item dictionary -->
                         {% for key in item.keys() %}
+                {% if key == "customerID" %}
+                {% for customer in customerData %}
+                {% if customer['customerID'] == item[key] %}
+                <td> {{customer['customerName']}} </td>
+                {% endif %}
+                {% endfor %}
 
-            <!-- Create a <td> element with the value of that key in it -->
-                        {% if key != "customerID" %}
-            <td> {{[item[key]][0]}} </td>
-            {% endif %}
-            {% if key == "customerID" %}
-            <td> {{customerData[item[key]]["customerName"]}} </td>
-            {% endif %}
 
-                        {% endfor %}
+
+                {% elif key != "customerID" %}
+                <td> {{item[key]}} </td>
+
+                {% endif %}
+                {% endfor %}
+
 
                         <!-- Edit/delete buttons -->
             <td><a href="editCommandLearned/{{item.commandsLearnedByDog}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>

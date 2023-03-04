@@ -1,0 +1,87 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Paw and Order</title>
+</head>
+<body>
+
+    <nav>    <div class="title">
+        <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
+    </div>
+    <div class="links">
+        <a href="index">Home</a>
+        ~
+        <a href="customers">Customers</a>
+        ~
+        <a href="dogs">Dogs</a>
+        ~
+        <a href="employees">Employees</a>
+        ~
+        <a href="commandsLearned">Commands Learned By Dog</a>
+        ~
+        <a href="commands">Commands</a>
+        ~
+        <a href="trainingSessions">TrainingSessions</a>
+    </div>
+    </nav>
+    <h1>Paw and Order Dogs</h1>
+
+    <table>
+      {% if data %}
+        <tr>
+        <th>Dog ID</th>
+          <th>Customer's Name</th>
+          <th>Dog's Name</th>
+          <th>Dog's Birthday</th>
+          <th>Active</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr>
+          {% for item in data %}
+
+
+          <tr>
+            <!-- Then iterate through every key in the current item dictionary -->
+                        {% for key in item.keys() %}
+
+            <!-- Create a <td> element with the value of that key in it -->
+                        {% if key != "customerID" %}
+            <td> {{[item[key]][0]}} </td>
+            {% endif %}
+            {% if key == "customerID" %}
+            <td> {{customerData[item[key]]["customerName"]}} </td>
+            {% endif %}
+
+                        {% endfor %}
+
+                        <!-- Edit/delete buttons -->
+            <td><a href="editCommandLearned/{{item.commandsLearnedByDog}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>
+            <td><a href="deleteEmployee/{{item.commandsLearnedByDog}}" class="btn btn-default"><i class="fa fa-trash"></i></a></td>
+
+          </tr>
+                    {% endfor %}
+            {% endif %}
+        </tr>
+      </table>
+      <form class="form" id="insertDog" action="/dogs" method="post">
+        <h2>Input New Dog:</h2>
+        <select name="customerID">
+        <option selected disabled> Customer Name </option>
+        {% for customer in customerData %}
+          <option id="customerID" required name="customerID" value={{customer['customerID']}}>{{customer['customerName']}}</option>
+          {% endfor %}
+</select>
+<input type="text" id="dogName" name="dogName" required placeholder="Dog Name">
+<input type="date" id="dogBirthday" name="dogBirthday" required placeholder="Dog's Birthday">
+        <select name="active">
+        <option selected disabled> Active </option>
+          <option id="active" required name="active" value=1>Yes</option>
+          <option id="active" required name="active" value=0>No</option>
+</select>
+        <button class="button" id=textButton id="Add Dog" value="Add Dog" name="Add Dog">Submit</button>
+      </form>
+</body>

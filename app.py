@@ -20,7 +20,7 @@ mysql = MySQL(app)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("home.j2")
 
 @app.route('/customers', methods=["POST", "GET"])
 def customers():
@@ -266,6 +266,57 @@ def dogs():
 
             # redirect back to dogs
             return redirect("/dogs")
+
+@app.route('/trainingSessions', methods=["POST", "GET"])
+def trainingSessions():
+    if request.method == "GET":
+        query = "SELECT customerID, dogID, employeeID, sessionDate, notes FROM TrainingSessions"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+        
+        query2 = "SELECT customerID, customerName FROM Customers"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        customerData = cur.fetchall()
+        
+        query3 = "SELECT dogID, dogName FROM Dogs"
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        dogData = cur.fetchall()
+        
+        query4 = "SELECT employeeID, employeeName FROM Employees WHERE employeeTitle = 'Trainer'"
+        cur = mysql.connection.cursor()
+        cur.execute(query4)
+        employeeData = cur.fetchall()
+        
+        return render_template("trainingSessions.j2", data = data, dogData = dogData, customerData = customerData, employeeData = employeeData)
+    
+    if request.method == "POST":
+        # When user adds a training session
+        if request.form.get("Add Training Session"):
+            # user form inputs
+            customerID = request.form["customerID"]
+            dogID = request.form["dogID"]
+            employeeID = request.form["employeeID"]
+            sessionDate = request.form["sessionDate"]
+            notes = request.form["notes"]
+            
+            # account for null dog
+            if dogID == "":
+                query = "INSERT INTO TrainingSessions (customerID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (customerID, employeeID, sessionDate, notes))
+                mysql.connection.commit()
+            
+            else:
+                query = "INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s, %s)"
+                cur = mysql.connection.cursor()
+                cur.execute(query, (customerID, dogID, employeeID, sessionDate, notes))
+                mysql.connection.commit()
+                
+    # redirect back to training sessions
+    return redirect("/trainingSessions")
 
 # Listener
 

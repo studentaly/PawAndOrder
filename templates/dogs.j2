@@ -13,7 +13,7 @@
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
     </div
     <div class="links">
-        <a href="index.html">Home</a>
+        <a href="/">Home</a>
         ~
         <a href="customers">Customers</a>
         ~
@@ -76,16 +76,16 @@
       </table>
       <form class="form" id="insertDog" action="/dogs" method="post">
         <h2>Input New Dog:</h2>
-        <select name="customerID">
-        <option selected disabled> Customer Name </option>
+        <select name="customerID" required>
+        <option value=""> Customer Name </option>
         {% for customer in customerData %}
           <option id="customerID" required name="customerID" value={{customer['customerID']}}>{{customer['customerName']}}</option>
           {% endfor %}
 </select>
 <input type="text" id="dogName" name="dogName" required placeholder="Dog Name">
 <input type="date" id="dogBirthday" name="dogBirthday" required placeholder="Dog's Birthday">
-        <select name="active">
-        <option selected disabled> Active </option>
+        <select name="active" required>
+        <option value=""> Active </option>
           <option id="active" required name="active" value=1>Yes</option>
           <option id="active" required name="active" value=0>No</option>
 </select>

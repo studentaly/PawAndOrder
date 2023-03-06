@@ -12,7 +12,7 @@
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
     </div
     <div class="links">
-        <a href="index">Home</a>
+        <a href="/">Home</a>
         ~
         <a href="customers">Customers</a>
         ~
@@ -71,14 +71,14 @@
       </table>
       <form class="form" id="insertCommandsLearned" action="/commandsLearned" method="post">
         <h2>Input New Command Learned:</h2>
-        <select name="commandID">
-        <option selected disabled> Command Name </option>
+        <select name="commandID" required>
+        <option value=""> Command </option>
         {% for command in commandData %}
           <option id="commandID" required name="commandID" value={{command['commandID']}}>{{command['commandName']}}</option>
           {% endfor %}
 </select>
-<select name="dogID">
-        <option selected disabled> Dog Name </option>
+<select name="dogID" required>
+  <option value=""> Dog Name </option>
         {% for dog in dogData %}
           <option name=dog['dogID']>{{dog['dogName']}}</option>
           {% endfor %}

@@ -19,8 +19,8 @@ SELECT customerID, customerName FROM Customers
 INSERT INTO Dogs (customerID, dogName, dogBirthday, active)
 VALUES (:customerIDInputFromDropdown, :dogNameInput, :dogBirthdayInput, :activeInput);
 -- Create Employee
-INSERT INTO Employees (employeeName, employeeTitle)
-VALUES (:employeeNameInput, :employeeTitleInput);
+INSERT INTO Employees (employeeName, employeeType)
+VALUES (:employeeNameInput, :employeeTypeInput);
 -- Create Command
 INSERT INTO Commands (commandName)
 VALUES (:commandNameInput);
@@ -28,7 +28,7 @@ VALUES (:commandNameInput);
 -- Part I: Pre-populate dropdown box with customerName, dogName, employeeName
 SELECT customerID, customerName FROM Customers;
 SELECT dogID, dogName FROM Dogs;
-SElECT employeeID, employeeName FROM Employees WHERE employeeTitle = "Trainer";
+SElECT employeeID, employeeName FROM Employees WHERE employeeType = "Trainer";
 -- Part II: Insert
 INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes)
 VALUES (:customerIDInputFromDropdown, :dogIDInputFromDropdown, :employeeIDInputFromDropdown, :sessionDateInput, :notesInput);

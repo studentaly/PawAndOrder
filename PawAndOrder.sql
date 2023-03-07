@@ -35,7 +35,7 @@ CREATE OR REPLACE TABLE Dogs (
 CREATE OR REPLACE TABLE Employees (
     employeeID int(11) NOT NULL AUTO_INCREMENT,
     employeeName varchar(50) NOT NULL,
-    employeeTitle varchar(50) NOT NULL,
+    employeeType varchar(50) NOT NULL,
     PRIMARY KEY (employeeID)
 );
 
@@ -55,8 +55,8 @@ CREATE OR REPLACE TABLE TrainingSessions (
     sessionDate date NOT NULL,
     notes varchar(300) NOT NULL,
     PRIMARY KEY (sessionID),
-    FOREIGN KEY (customerID) REFERENCES Customers(customerID),
-    FOREIGN KEY (dogID) REFERENCES Dogs(dogID),
+    FOREIGN KEY (customerID) REFERENCES Customers(customerID) ON DELETE CASCADE,
+    FOREIGN KEY (dogID) REFERENCES Dogs(dogID) ON DELETE CASCADE,
     FOREIGN KEY (employeeID) REFERENCES Employees(employeeID)
     ON DELETE CASCADE
 );
@@ -92,7 +92,7 @@ VALUES (1, 'Spot', '2022-10-20', 1),
 (3, 'Echo', '2015-08-13', 0);
 
 -- Insert Employees data
-INSERT INTO Employees (employeeName, employeeTitle)
+INSERT INTO Employees (employeeName, employeeType)
 VALUES ('Jaime Gomez', 'Trainer'),
 ("Rachel Li", "Office Manager"),
 ("Deborah Pasic", "Trainer");

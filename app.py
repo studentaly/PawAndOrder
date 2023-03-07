@@ -315,8 +315,8 @@ def trainingSessions():
                 cur.execute(query, (customerID, dogID, employeeID, sessionDate, notes))
                 mysql.connection.commit()
 
-    # redirect back to training sessions
-    return redirect("/trainingSessions")
+        # redirect back to training sessions
+        return redirect("/trainingSessions")
 
 # Listener
 

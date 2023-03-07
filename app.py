@@ -274,24 +274,24 @@ def trainingSessions():
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
-        
+
         query2 = "SELECT customerID, customerName FROM Customers"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         customerData = cur.fetchall()
-        
+
         query3 = "SELECT dogID, dogName FROM Dogs"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         dogData = cur.fetchall()
-        
-        query4 = "SELECT employeeID, employeeName FROM Employees WHERE employeeTitle = 'Trainer'"
+
+        query4 = "SELECT employeeID, employeeName FROM Employees WHERE employeeType = 'Trainer'"
         cur = mysql.connection.cursor()
         cur.execute(query4)
         employeeData = cur.fetchall()
-        
+
         return render_template("trainingSessions.j2", data = data, dogData = dogData, customerData = customerData, employeeData = employeeData)
-    
+
     if request.method == "POST":
         # When user adds a training session
         if request.form.get("Add Training Session"):
@@ -301,20 +301,20 @@ def trainingSessions():
             employeeID = request.form["employeeID"]
             sessionDate = request.form["sessionDate"]
             notes = request.form["notes"]
-            
+
             # account for null dog
             if dogID == "":
                 query = "INSERT INTO TrainingSessions (customerID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s)"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerID, employeeID, sessionDate, notes))
                 mysql.connection.commit()
-            
+
             else:
                 query = "INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s, %s)"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerID, dogID, employeeID, sessionDate, notes))
                 mysql.connection.commit()
-                
+
     # redirect back to training sessions
     return redirect("/trainingSessions")
 

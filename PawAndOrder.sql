@@ -109,7 +109,7 @@ VALUES ('Sit'),
 INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes)
 VALUES (1, 1, 1, "2023-02-04", "Good Boy"),
 (2, 2, 1, "2023-02-04", "Good Boy"),
-(2, 3, 1, "2023-02-04", "Good Boy"),
+(2, NULL, 1, "2023-02-04", "Reactivity training consultation"),
 (1, 1, 3, "2023-02-05", "Ate all the treats, order more"),
 (2, 2, 3, "2023-02-05", "Need to revisit down command");
 

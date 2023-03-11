@@ -48,18 +48,23 @@
 
           <tr>
             <!-- Then iterate through every key in the current item dictionary -->
-                        {% for key in item.keys() %}
+                {% for key in item.keys() %}
                 {% if key == "customerID" %}
-                {% for customer in customerData %}
-                {% if customer['customerID'] == item[key] %}
-                <td> {{customer['customerName']}} </td>
-                {% endif %}
-                {% endfor %}
+                  {% for customer in customerData %}
+                  {% if customer['customerID'] == item[key] %}
+                  <td> {{customer['customerName']}} </td>
+                  {% endif %}
+                  {% endfor %}
 
+                {% elif key == "active" %}     
+                  {% if item[key] == 1 %}     
+                      <td> Yes </td> 
+                  {% else %}     
+                      <td> No </td> 
+                  {% endif %} 
 
-
-                {% elif key != "customerID" %}
-                <td> {{item[key]}} </td>
+                {% else %}
+                  <td> {{item[key]}} </td>
 
                 {% endif %}
                 {% endfor %}

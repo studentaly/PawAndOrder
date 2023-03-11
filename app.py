@@ -266,6 +266,36 @@ def dogs():
 
             # redirect back to dogs
             return redirect("/dogs")
+@app.route("/editDog/<int:dogID>", methods=["POST", "GET"])
+def editDog(dogID):
+    if request.method == "GET":
+        query = "SELECT dogID, customerID, dogName, dogBirthday, active FROM Dogs WHERE DogID = '%s';" % (dogID)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        query2 = "SELECT customerID, customerName FROM Customers"
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        customerData = cur.fetchall()
+
+        return render_template("editDog.j2", data=data, customerData=customerData)
+
+    if request.method == "POST":
+        # When user clicks "Edit dog"
+        if request.form.get("editDog"):
+            dogID = request.form["dogID"]
+            customerID = request.form["customerID"]
+            dogName = request.form["dogName"]
+            dogBirthday = request.form["dogBirthday"]
+            active = request.form["active"]
+
+            query = "UPDATE Dogs SET Dogs.customerID = %s, Dogs.dogName = %s, Dogs.dogBirthday = %s, Dogs.active = %s WHERE Dogs.dogID = %s"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (customerID, dogName, dogBirthday, active, dogID))
+            mysql.connection.commit()
+
+    return redirect("/dogs")
 
 @app.route('/trainingSessions', methods=["POST", "GET"])
 def trainingSessions():
@@ -280,7 +310,7 @@ def trainingSessions():
         cur.execute(query2)
         customerData = cur.fetchall()
 
-        query3 = "SELECT dogID, dogName FROM Dogs"
+        query3 = "SELECT dogID, dogName FROM Dogs WHERE active = 1"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         dogData = cur.fetchall()

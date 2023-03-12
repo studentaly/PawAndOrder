@@ -35,36 +35,35 @@
         <th>CommandByDogID</th>
           <th>Command Name</th>
           <th>Dog's Name</th>
-          <th>Edit</th>
-          <th>Delete</th>
         </tr>
         <tr>
-        <tr>{{data}}</tr>
           {% for item in data %}
 
 
           <tr>
             <!-- Then iterate through every key in the current item dictionary -->
-                        {% for key in item.keys() %}
-
+                         {% for key in item.keys() %}
             <!-- Create a <td> element with the value of that key in it -->
-                        {% if key == "CommandsLearnedByDog" %}
-            <td> {{[item[key]][0]}} </td>
-            {% endif %}
-            {% if key == "commandID" %}
-            <td> {{commandData[item[key]]["commandName"]}} </td>
-            {% endif %}
-                        {% if key == "dogID" %}
-            <td> {{dogData[item[key]]["dogName"]}} </td>
-            {% endif %}
+                {% if key == "CommandsLearnedByDog" %}
+                <td> {{item[key]}} </td>
 
-                        {% endfor %}
+                {% elif key == "commandID" and item[key] %}
+                {% for command in commandData %}
+                {% if command['commandID'] == item[key] %}
+                <td> {{command['commandName']}} </td>
+                {% endif %}
+                {% endfor %}
 
-                        <!-- Edit/delete buttons -->
-            <td><a href="editCommandLearned/{{item.commandsLearnedByDog}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>
-            <td><a href="deleteEmployee/{{item.commandsLearnedByDog}}" class="btn btn-default"><i class="fa fa-trash"></i></a></td>
+                {% else %}
+                {% for dog in dogData %}
+                {% if dog['dogID'] == item[key] %}
+                <td> {{dog['dogName']}} </td>
+                {% endif %}
+                {% endfor %}
 
           </tr>
+          {% endif %}
+                    {% endfor %}
                     {% endfor %}
             {% endif %}
         </tr>
@@ -80,7 +79,7 @@
 <select name="dogID" required>
   <option value=""> Dog Name </option>
         {% for dog in dogData %}
-          <option name=dog['dogID']>{{dog['dogName']}}</option>
+          <option id="dogID" required name="dogID" value={{dog['dogID']}}>{{dog['dogName']}}</option>
           {% endfor %}
 </select>
         <button class="button" id=textButton id="Add CommandByDog" value="Add CommandByDog" name="Add CommandByDog">Submit</button>

@@ -297,6 +297,15 @@ def editDog(dogID):
 
     return redirect("/dogs")
 
+@app.route('/deleteDog/<int:dogID>')
+def deleteDog(dogID):
+    query = "DELETE FROM Dogs WHERE dogID = '%s';"
+    cur = mysql.connection.cursor()
+    cur.execute(query, (dogID,))
+    mysql.connection.commit()
+
+    return redirect("/dogs")
+
 @app.route('/trainingSessions', methods=["POST", "GET"])
 def trainingSessions():
     if request.method == "GET":

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Paw and Order</title>
 </head>
-<body>
+<body class="customers">
 
   <nav>    <div class="title">
       <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
@@ -65,7 +65,7 @@
       <h2>Input New Customer:</h2>
       <input type="text" id="customerName" name="customerName" required placeholder="Customer Name">
       <input type="text" id="altName" name = "altName" placeholder="Alternate Name">
-      <input type="tel" id="phone" name = "phone" placeholder="Phone Number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+      <input type="tel" id="phone" name = "phone" placeholder="Phone Number" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="XXX-XXX-XXXX" />
       <input type="email" id="email" name = "email" placeholder="Email">
       <button class="button" id=textButton id="Add Customer" value="Add Customer" name="Add Customer">Submit</button>
     </form>

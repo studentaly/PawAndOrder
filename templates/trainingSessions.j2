@@ -8,7 +8,7 @@
     
     <title>Paw and Order</title>
 </head>
-<body>
+<body class="trainingSessions">
 
     <nav>    <div class="title">
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
@@ -38,7 +38,7 @@
           <th>Dog</th>
           <th>Employee</th>
           <th>Session Date</th>
-          <th>Notes</th>
+          <th class="trainingSessions">Notes</th>
         </tr>
         <tr>
 
@@ -94,9 +94,10 @@
         <select name="dogID" required>
         <option value=""> Dog Name </option>
         <option value="">-none-</option>
-        {% for dog in dogData %}
-          <option id="dogID" name="dogID" value={{dog['dogID']}}>{{dog['dogName']}}</option>
-          {% endfor %}
+        {% for dog in dogData if dog['active'] %}
+          <option id="dogID" required name="dogID" value={{dog['dogID']}}>{{dog['dogName']}}</option>
+        {% endfor %}
+
         </select>
 
         <select name="employeeID" required>

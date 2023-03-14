@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Paw and Order</title>
 </head>
-<body>
+<body class="commandsLearned">
+
 
     <nav>    <div class="title">
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
@@ -27,6 +28,7 @@
         <a href="trainingSessions">TrainingSessions</a>
     </div>
     </nav>
+
     <h1>Paw and Order Commands Learned by Dog</h1>
 
     <table>
@@ -38,7 +40,6 @@
         </tr>
         <tr>
           {% for item in data %}
-
 
           <tr>
             <!-- Then iterate through every key in the current item dictionary -->
@@ -78,7 +79,7 @@
 </select>
 <select name="dogID" required>
   <option value=""> Dog Name </option>
-        {% for dog in dogData %}
+        {% for dog in dogData if dog['active'] %}
           <option id="dogID" required name="dogID" value={{dog['dogID']}}>{{dog['dogName']}}</option>
           {% endfor %}
 </select>

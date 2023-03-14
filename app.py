@@ -209,7 +209,7 @@ def commandsLearned():
         cur.execute(query2)
         commandData = cur.fetchall()
 
-        query3 = "SELECT dogID, dogName FROM Dogs"
+        query3 = "SELECT dogID, dogName, active FROM Dogs"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         dogData = cur.fetchall()
@@ -319,7 +319,7 @@ def trainingSessions():
         cur.execute(query2)
         customerData = cur.fetchall()
 
-        query3 = "SELECT dogID, dogName FROM Dogs WHERE active = 1"
+        query3 = "SELECT dogID, dogName, active FROM Dogs"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         dogData = cur.fetchall()

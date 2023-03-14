@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Paw and Order</title>
 </head>
-<body>
+<body class="commands">
 
     <nav>    <div class="title">
         <h1><i class="fa fa-paw"></i></i>Paw and Order<i class="fa fa-gavel"></i></h1>
@@ -48,8 +48,8 @@
                         {% endfor %}
 
                         <!-- Edit/delete buttons -->
-            <td><a href="editCommand/{{item.commandID}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>
-            <td><a href="deleteCommand/{{item.commandID}}" class="btn btn-default"><i class="fa fa-trash"></i></a></td>
+            <td><a href="editCommand/{{item.commandID}}" class="icon"><i class="fa fa-paw"></i></a></td>
+            <td><a href="deleteCommand/{{item.commandID}}" class="icon"><i class="fa fa-trash"></i></a></td>
 
           </tr>
                     {% endfor %}

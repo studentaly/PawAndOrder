@@ -37,8 +37,6 @@
           <th>Employee ID</th>
           <th>Employee's Name</th>
           <th>Employee's Title</th>
-                    <th>Edit</th>
-          <th>Delete</th>
         </tr>
         <tr>
           {% for item in data %}
@@ -49,10 +47,6 @@
             <!-- Create a <td> element with the value of that key in it -->
             <td> {{item[key]}} </td>
                         {% endfor %}
-
-                        <!-- Edit/delete buttons -->
-            <td><a href="editEmployee/{{item.employeeID}}" class="btn btn-default"><i class="fa fa-paw"></i></a></td>
-            <td><a href="deleteEmployee/{{item.employeeID}}" class="btn btn-default"><i class="fa fa-trash"></i></a></td>
 
           </tr>
                     {% endfor %}

@@ -29,13 +29,14 @@
     </nav>
     <h1>Paw and Order Commands</h1>
 
+{# part of this code is copied from or based off a cited source.  Please see readme for full citation #}
+
     <table>
       {% if data %}
         <tr>
           <th>Command ID</th>
           <th>Command Name</th>
-                    <th>Edit</th>
-          <th>Delete</th>
+
         </tr>
         <tr>
           {% for item in data %}
@@ -47,9 +48,7 @@
             <td> {{item[key]}} </td>
                         {% endfor %}
 
-                        <!-- Edit/delete buttons -->
-            <td><a href="editCommand/{{item.commandID}}" class="icon"><i class="fa fa-paw"></i></a></td>
-            <td><a href="deleteCommand/{{item.commandID}}" class="icon"><i class="fa fa-trash"></i></a></td>
+
 
           </tr>
                     {% endfor %}

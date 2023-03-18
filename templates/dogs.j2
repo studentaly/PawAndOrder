@@ -1,4 +1,5 @@
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,6 +31,8 @@
     </nav>
     <h1>Paw and Order Dogs</h1>
 
+{# part of this code is copied from or based off a cited source.  Please see readme for full citation #}
+
     <table>
       {% if data %}
         <tr>
@@ -56,12 +59,12 @@
                   {% endif %}
                   {% endfor %}
 
-                {% elif key == "active" %}     
-                  {% if item[key] == 1 %}     
-                      <td> Yes </td> 
-                  {% else %}     
-                      <td> No </td> 
-                  {% endif %} 
+                {% elif key == "active" %}
+                  {% if item[key] == 1 %}
+                      <td> Yes </td>
+                  {% else %}
+                      <td> No </td>
+                  {% endif %}
 
                 {% else %}
                   <td> {{item[key]}} </td>
@@ -88,6 +91,7 @@
           {% endfor %}
 </select>
 <input type="text" id="dogName" name="dogName" required placeholder="Dog Name">
+<label>Dog's Birthday: </label>
 <input type="date" id="dogBirthday" name="dogBirthday" required placeholder="Dog's Birthday">
         <select name="active" required>
         <option value=""> Active </option>

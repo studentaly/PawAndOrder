@@ -1,4 +1,5 @@
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,12 +31,14 @@
     </nav>
     <h1>Edit Dog</h1>
 
+{# part of this code is copied from or based off a cited source.  Please see readme for full citation #}
+
 <div class="form">
     <form class="form" id="editDog" action="/editDog/{{data[0].dogID}}" method="post">
         <h2>Edit Dog Information:</h2>
         <input type="hidden" value="{{data[0].dogID}}" class="form-control" id="dogID" name="dogID" required>
         <select name="customerID" required>
-        {% for customer in customerData %} 
+        {% for customer in customerData %}
         {% if customer['customerID'] == data[0].customerID %}
         <option id="customerID" value={{customer['customerID']}}>{{customer['customerName']}} </option>
         {% endif %}
@@ -44,7 +47,7 @@
         {% if customer['customerID'] != data[0].customerID %}
             <option id="customerID" value={{customer['customerID']}}>{{customer['customerName']}} </option>        {% endif %}
           {% endfor %}
-        </select>        
+        </select>
         <input type="text" id="dogName" name = "dogName" value="{{data[0].dogName}}">
         <input type= "date" id="dogBirthday" name = "dogBirthday" value="{{data[0].dogBirthday}}" required>
         <select name="active" required>

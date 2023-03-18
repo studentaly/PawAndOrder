@@ -17,7 +17,7 @@ mysql = MySQL(app)
 
 
 # Routes
-
+# part of this code is copied from or based off a cited source.  Please see readme for full citation
 @app.route('/')
 def index():
     return render_template("home.j2")

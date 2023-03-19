@@ -9,7 +9,7 @@
 -- (C)RUD
 -- -----------------------------------------------------
 
--- Create Customer
+-- Create Customer with no NULL data
 INSERT INTO Customers (customerName, altName, phone, email)
 VALUES (:customerNameInput, :altNameInput, :phoneInput, :emailInput);
 -- Create Dog
@@ -54,15 +54,16 @@ ON Dogs.customerID = Customers.customerID;
 SELECT * FROM Employees;
 -- Display all command information
 SELECT * FROM Commands;
--- Display all Training Session information; inner join to get names instead of IDs
-SELECT Customers.customerName, Dogs.dogName, Employees.employeeName, sessionDate, notes
+-- Display all Training Session information; 
+-- Part I inner join to get Customer/Employee names instead of IDs.
+SELECT Customers.customerName, dogID, Employees.employeeName, sessionDate, notes
 FROM TrainingSessions
 INNER JOIN Customers
 ON TrainingSessions.customerID = Customers.customerID
-INNER JOIN Dogs
-ON TrainingSessions.dogID = Dogs.dogID
 INNER JOIN Employees
 ON TrainingSessions.employeeID = Employees.employeeID;
+-- Part II to get Dog names. Not inner joined because dogID may be NULL
+SELECT dogID, dogName, active FROM Dogs;
 --Display all Commands Learned Information
 SELECT Commands.commandName, Dogs.dogName FROM CommandsLearned
 INNER JOIN Commands
@@ -74,26 +75,29 @@ ON CommandsLearned.dogID = Dogs.DogID;
 --CR(U)D
 -- -----------------------------------------------------
 -- Update entry in Customers
+-- Part I: Pre-populate with current data
+SELECT customerID, customerName, phone FROM Customers WHERE customerID = :customerIDInput;
+SELECT altName FROM Customers WHERE customerID = :customerIDInput AND altName IS NOT NULL;
+SELECT email FROM Customers WHERE customerID = :customerIDInput AND email IS NOT NULL;
+-- Part II: Update
 UPDATE Customers
    SET customerName = :customerNameInput, altName = :altNameInput,
        phone = :phoneInput, email = :emailInput
 
 -- Update entry in Dogs
--- Part I: Pre-populate drop-down box with customer names
-SELECT customerID, customerName FROM Customers
+-- Part I: Pre-populate with current data and customer drop-down
+SELECT dogID, customerID, dogName, dogBirthday, active FROM Dogs WHERE DogID = :dogIDInput;
+SELECT customerID, customerName FROM Customers;
 -- Part II: Update
 UPDATE Dogs
    SET customerID = :customerIDInputFromDropdown, dogName = :dogNameInput, dogBirtday = :dogBirthdayInput,
        active = :activeInput
-   WHERE dogID = :dogIDInput
+   WHERE dogID = :dogIDInput;
 
 -- -----------------------------------------------------
 --CRU(D)
 -- -----------------------------------------------------
 -- Delete entry in Customers
 DELETE FROM Customers WHERE customerID = :customerIDInput;
--- M:M relationship deletion by dogID
-DELETE FROM CommandsLearned WHERE dogID = :dogIDFromInput;
-DELETE FROM TrainingSessions WHERE dogID = :dogIDInput;
--- Delete Dog
+-- Delete entry in Dogs
 DELETE FROM Dogs WHERE dogID = :dogIDInput;

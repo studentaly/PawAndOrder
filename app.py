@@ -25,7 +25,7 @@ def index():
 @app.route('/customers', methods=["POST", "GET"])
 def customers():
     if request.method == "GET":
-        query = "SELECT* FROM Customers"
+        query = "SELECT* FROM Customers;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data= cur.fetchall()
@@ -44,28 +44,28 @@ def customers():
             # account for null email AND altName
             if email == "" and altName == "":
                 # mySQL query to insert a new customer into Customers
-                query = "INSERT INTO Customers (customerName, phone) VALUES (%s, %s)"
+                query = "INSERT INTO Customers (customerName, phone) VALUES (%s, %s);"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone))
                 mysql.connection.commit()
 
             # account for null email
             elif email == "":
-                query = "INSERT INTO Customers (customerName, altName, phone) VALUES (%s, %s, %s)"
+                query = "INSERT INTO Customers (customerName, altName, phone) VALUES (%s, %s, %s);"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, altName, phone))
                 mysql.connection.commit()
 
             # account for null altName
             elif altName == "":
-                query = "INSERT INTO Customers (customerName, phone, email) VALUES (%s, %s, %s)"
+                query = "INSERT INTO Customers (customerName, phone, email) VALUES (%s, %s, %s);"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone, email))
                 mysql.connection.commit()
 
             # no null inputs
             else:
-                query = "INSERT INTO Customers (customerName, altName, phone, email) VALUES (%s, %s, %s, %s)"
+                query = "INSERT INTO Customers (customerName, altName, phone, email) VALUES (%s, %s, %s, %s);"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, altName, phone, email))
                 mysql.connection.commit()
@@ -115,28 +115,28 @@ def editCustomer(customerID):
         # account for null altName AND email
             if altName == "" and email == "":
                 # mySQL query to update customer in Customers DB with our form inputs
-                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = NULL, Customers.email = NULL WHERE Customers.customerID = %s"
+                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = NULL, Customers.email = NULL WHERE Customers.customerID = %s;"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone, customerID))
                 mysql.connection.commit()
 
             # account for null altName
             elif altName == "":
-                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = NULL, Customers.email = %s WHERE Customers.customerID = %s"
+                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = NULL, Customers.email = %s WHERE Customers.customerID = %s;"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone, email, customerID))
                 mysql.connection.commit()
 
             # account for null email
             elif email == "":
-                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = %s, Customers.email = NULL WHERE Customers.customerID = %s"
+                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = %s, Customers.email = NULL WHERE Customers.customerID = %s;"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone, altName, customerID))
                 mysql.connection.commit()
 
             # no null inputs
             else:
-                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = %s, Customers.email = %s WHERE Customers.customerID = %s"
+                query = "UPDATE Customers SET Customers.customerName = %s, Customers.phone = %s, Customers.altName = %s, Customers.email = %s WHERE Customers.customerID = %s;"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerName, phone, altName, email, customerID))
                 mysql.connection.commit()
@@ -146,7 +146,7 @@ def editCustomer(customerID):
 @app.route('/employees', methods=["POST", "GET"])
 def employees():
     if request.method == "GET":
-        query = "SELECT* FROM Employees"
+        query = "SELECT* FROM Employees;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data= cur.fetchall()
@@ -162,7 +162,7 @@ def employees():
 
             # All inputs are required
 
-            query = "INSERT INTO Employees (employeeName, employeeType) VALUES (%s, %s)"
+            query = "INSERT INTO Employees (employeeName, employeeType) VALUES (%s, %s);"
             cur = mysql.connection.cursor()
             cur.execute(query, (employeeName, employeeType))
             mysql.connection.commit()
@@ -173,7 +173,7 @@ def employees():
 @app.route('/commands', methods=["POST", "GET"])
 def commands():
     if request.method == "GET":
-        query = "SELECT* FROM Commands"
+        query = "SELECT* FROM Commands;"
         cur = mysql.connection.cursor()
         cur.execute(query)
         data= cur.fetchall()
@@ -188,7 +188,7 @@ def commands():
 
             # All inputs are required
 
-            query = "INSERT INTO Commands (commandName) VALUES (%s)"
+            query = "INSERT INTO Commands (commandName) VALUES (%s);"
             cur = mysql.connection.cursor()
             cur.execute(query, ([commandName]))
             mysql.connection.commit()
@@ -199,17 +199,19 @@ def commands():
 @app.route('/commandsLearned', methods=["POST", "GET"])
 def commandsLearned():
     if request.method == "GET":
-        query = "SELECT* FROM CommandsLearned"
+        query = """SELECT Commands.commandName, Dogs.dogName FROM CommandsLearned 
+        INNER JOIN Commands ON CommandsLearned.commandID = Commands.commandID 
+        INNER JOIN Dogs ON CommandsLearned.dogID = Dogs.DogID;"""
         cur = mysql.connection.cursor()
         cur.execute(query)
         data= cur.fetchall()
 
-        query2 = "SELECT commandID, commandName FROM Commands"
+        query2 = "SELECT commandID, commandName FROM Commands;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         commandData = cur.fetchall()
 
-        query3 = "SELECT dogID, dogName, active FROM Dogs"
+        query3 = "SELECT dogID, dogName FROM Dogs WHERE active = 1;"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         dogData = cur.fetchall()
@@ -225,7 +227,7 @@ def commandsLearned():
 
             # All inputs are required
 
-            query = "INSERT INTO CommandsLearned (commandID, dogID) VALUES (%s, %s)"
+            query = "INSERT INTO CommandsLearned (commandID, dogID) VALUES (%s, %s);"
             cur = mysql.connection.cursor()
             cur.execute(query, (commandID, dogID))
             mysql.connection.commit()
@@ -236,7 +238,8 @@ def commandsLearned():
 @app.route('/dogs', methods=["POST", "GET"])
 def dogs():
     if request.method == "GET":
-        query = "SELECT* FROM Dogs"
+        query = """SELECT dogID, Customers.customerName, dogName, dogBirthday, active FROM Dogs 
+        INNER JOIN Customers ON Dogs.customerID = Customers.customerID;"""
         cur = mysql.connection.cursor()
         cur.execute(query)
         data= cur.fetchall()
@@ -259,7 +262,7 @@ def dogs():
 
             # All inputs are required
 
-            query = "INSERT INTO Dogs (customerID, dogName, dogBirthday, active) VALUES (%s, %s, %s, %s)"
+            query = "INSERT INTO Dogs (customerID, dogName, dogBirthday, active) VALUES (%s, %s, %s, %s);"
             cur = mysql.connection.cursor()
             cur.execute(query, (customerID, dogName, dogBirthday, active))
             mysql.connection.commit()
@@ -274,7 +277,7 @@ def editDog(dogID):
         cur.execute(query)
         data = cur.fetchall()
 
-        query2 = "SELECT customerID, customerName FROM Customers"
+        query2 = "SELECT customerID, customerName FROM Customers;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         customerData = cur.fetchall()
@@ -290,7 +293,7 @@ def editDog(dogID):
             dogBirthday = request.form["dogBirthday"]
             active = request.form["active"]
 
-            query = "UPDATE Dogs SET Dogs.customerID = %s, Dogs.dogName = %s, Dogs.dogBirthday = %s, Dogs.active = %s WHERE Dogs.dogID = %s"
+            query = "UPDATE Dogs SET Dogs.customerID = %s, Dogs.dogName = %s, Dogs.dogBirthday = %s, Dogs.active = %s WHERE Dogs.dogID = %s;"
             cur = mysql.connection.cursor()
             cur.execute(query, (customerID, dogName, dogBirthday, active, dogID))
             mysql.connection.commit()
@@ -309,22 +312,28 @@ def deleteDog(dogID):
 @app.route('/trainingSessions', methods=["POST", "GET"])
 def trainingSessions():
     if request.method == "GET":
-        query = "SELECT customerID, dogID, employeeID, sessionDate, notes FROM TrainingSessions"
+        query = """SELECT Customers.customerName, dogID, Employees.employeeName, sessionDate, notes
+        FROM TrainingSessions
+        INNER JOIN Customers
+        ON TrainingSessions.customerID = Customers.customerID
+        INNER JOIN Employees
+        ON TrainingSessions.employeeID = Employees.employeeID;
+        """
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
 
-        query2 = "SELECT customerID, customerName FROM Customers"
+        query2 = "SELECT customerID, customerName FROM Customers;"
         cur = mysql.connection.cursor()
         cur.execute(query2)
         customerData = cur.fetchall()
 
-        query3 = "SELECT dogID, dogName, active FROM Dogs"
+        query3 = "SELECT dogID, dogName, active FROM Dogs;"
         cur = mysql.connection.cursor()
         cur.execute(query3)
         dogData = cur.fetchall()
 
-        query4 = "SELECT employeeID, employeeName FROM Employees WHERE employeeType = 'Trainer'"
+        query4 = "SELECT employeeID, employeeName FROM Employees WHERE employeeType = 'Trainer';"
         cur = mysql.connection.cursor()
         cur.execute(query4)
         employeeData = cur.fetchall()
@@ -343,13 +352,13 @@ def trainingSessions():
 
             # account for null dog
             if dogID == "":
-                query = "INSERT INTO TrainingSessions (customerID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s)"
+                query = "INSERT INTO TrainingSessions (customerID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s);"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerID, employeeID, sessionDate, notes))
                 mysql.connection.commit()
 
             else:
-                query = "INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s, %s)"
+                query = "INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes) VALUES (%s, %s, %s, %s, %s);"
                 cur = mysql.connection.cursor()
                 cur.execute(query, (customerID, dogID, employeeID, sessionDate, notes))
                 mysql.connection.commit()

@@ -27,7 +27,7 @@ VALUES (:commandNameInput);
 -- Create Training Session
 -- Part I: Pre-populate dropdown box with customerName, dogName, employeeName
 SELECT customerID, customerName FROM Customers;
-SELECT dogID, dogName FROM Dogs;
+SELECT dogID, dogName, active FROM Dogs;
 SElECT employeeID, employeeName FROM Employees WHERE employeeType = "Trainer";
 -- Part II: Insert
 INSERT INTO TrainingSessions (customerID, dogID, employeeID, sessionDate, notes)
